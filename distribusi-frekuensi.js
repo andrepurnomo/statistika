@@ -76,7 +76,7 @@ function get_result_d() {
       "/" +
       kelas +
       "</br><font color='white'>__</font>= " +
-      jangkauan / kelas +
+      Number(jangkauan / kelas).toFixed(1) +
       "</br><font color='white'>__</font>= " +
       interval
   );
