@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Distribusi Frekuensi</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Distribusi Frekuensi</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>Masukkan data acak / tunggal</p>
+          <p>Catatan : Dipisahkan dengan huruf koma (,)</p>
+          <p>Contoh :</p>
+          <p>32,45,21</p>
+          <p>56,43,21</p>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Data</label>
+            <textarea class="form-control" id="data" rows="5"></textarea>
+          </div>
+          <button onclick="get_result()" type="button" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </div>
+      <div class="result">
+        <div class="row">
+          <div class="col">
+            <p></p>
+            <h3>a. Urutan data adalah</h3>
+            <div id="resulta">
+              <table class="table table-light result-a-table"></table>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>b. Jangkauan (R) adalah</h3>
+            <div id="resultb"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>c. Banyaknya kelas (k) adalah</h3>
+            <div id="resultc"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>d. Panjang interval kelas (i) adalah</h3>
+            <div id="resultd"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>e. Batas kelas pertama (data terkecil) adalah</h3>
+            <div id="resulte"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>f. Tabelnya adalah</h3>
+            <div id="resultf">
+              <table class="table table-light result-f-table"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="distribusi-frekuensi.js"></script>
+  </body>
+</html>
