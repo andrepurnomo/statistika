@@ -69,7 +69,7 @@ function get_result_c() {
 }
 
 function get_result_d() {
-  interval = Math.round(jangkauan / kelas);
+  interval = Math.ceil(jangkauan / kelas);
   $("#resultd").html(
     "i = " +
       jangkauan +
@@ -91,6 +91,7 @@ function get_result_f() {
   first = true;
   start = min;
   end = max;
+  total = 0;
 
   for (var i = 0; i < kelas; i++) {
     if (first) {
@@ -105,6 +106,7 @@ function get_result_f() {
 
     next = start + interval - 1;
     count = data.filter(get_between);
+    total += count.length;
     diameter = document.createTextNode(start + " - " + next);
     frekuensi = document.createTextNode(count.length);
 
@@ -119,9 +121,7 @@ function get_result_f() {
     start = next + 1;
   }
 
-  $(".result-f-table").append(
-    "<tr><th>Jumlah</th><th>" + data.length + "</th>"
-  );
+  $(".result-f-table").append("<tr><th>Jumlah</th><th>" + total + "</th>");
 }
 
 function get_between(val) {
