@@ -24,35 +24,67 @@
       </div>
       <div class="row">
         <div class="col">
-          <p>Masukkan data acak / tunggal</p>
-          <p>Catatan : Dipisahkan dengan huruf koma (,)</p>
-          <p>Contoh :</p>
-          <p>32,45,21</p>
-          <p>56,43,21</p>
+          <div class="no-print">
+            <p>Masukkan data acak / tunggal</p>
+            <p>Catatan : Dipisahkan dengan huruf koma (,)</p>
+            <p>Contoh :</p>
+            <p>32,45,21</p>
+            <p>56,43,21</p>
+          </div>
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text">Nilai Awal dan Nilai Akhir</span>
               </div>
-              <input type="text" value="0" name="number_start" aria-label="First name" class="form-control" />
-              <input type="text" value="100" name="number_end" aria-label="Last name" class="form-control" />
+              <input
+                type="text"
+                value="0"
+                name="number_start"
+                class="form-control"
+              />
+              <input
+                type="text"
+                value="100"
+                name="number_end"
+                class="form-control"
+              />
             </div>
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text">Jumlah Baris dan Jumlah Kolom</span>
+                <span class="input-group-text"
+                  >Jumlah Baris dan Jumlah Kolom</span
+                >
               </div>
-              <input type="text" value="5" name="count_row" aria-label="First name" class="form-control" />
-              <input type="text" value="10" name="count_column" aria-label="Last name" class="form-control" />
+              <input
+                type="text"
+                value="5"
+                name="count_row"
+                class="form-control"
+              />
+              <input
+                type="text"
+                value="10"
+                name="count_column"
+                class="form-control"
+              />
             </div>
           </div>
-          <button onclick="get_generate()" type="button" class="btn btn-primary">
+          <button
+            onclick="get_generate()"
+            type="button"
+            class="btn btn-primary no-print"
+          >
             Generate Data
-          </button></br></br>
+          </button>
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Data</label>
             <textarea class="form-control" id="data" rows="5"></textarea>
           </div>
-          <button onclick="get_result()" type="button" class="btn btn-primary">
+          <button
+            onclick="get_result()"
+            type="button"
+            class="btn btn-primary no-print"
+          >
             Hitung
           </button>
         </div>

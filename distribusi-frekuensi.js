@@ -129,7 +129,7 @@ function get_result_e() {
 function get_result_f() {
   $(".result-f-table").empty();
   str_table_header =
-    "<table class='table'><thead><tr><th>Diameter</th><th>Frekuensi</th></tr></thead><tbody>";
+    "<table class='table table-sm'><thead><tr><th>Diameter</th><th>Frekuensi</th></tr></thead><tbody>";
   str_table_tr_first = "<tr>";
   str_table_tr_end = "</tr>";
   str_table_td_first = "<td>";
