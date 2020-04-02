@@ -1,7 +1,24 @@
 $(".result").hide();
-$("textarea#data").val(
-  "65, 65, 67, 68, 69, 70, 70, 70, 70, 71\n71, 71, 72, 72, 72, 72, 72, 72, 73, 73\n73, 74, 74, 74, 74, 74, 74, 74, 75, 75\n75, 75, 75, 76, 77, 78, 79, 79, 80, 82"
-);
+
+function get_generate() {
+  number_start = $("input[name=number_start]").val();
+  number_end = $("input[name=number_end]").val();
+  count_row = $("input[name=count_row]").val();
+  count_column = $("input[name=count_column]").val();
+
+  datas = "";
+
+  for (var r = 0; r < count_row; r++) {
+    for (var c = 0; c < count_column; c++) {
+      datas += self.getRandomInt(number_start, number_end);
+
+      if (!(c == count_column - 1)) datas += ", ";
+    }
+    if (!(r == count_row - 1)) datas += "\n";
+  }
+
+  $("textarea#data").val(datas);
+}
 
 function get_result() {
   value = $("textarea#data").val();
@@ -55,7 +72,14 @@ function get_result_b() {
 
 function get_result_c() {
   log = 3.3 * Math.log10(data.length);
-  kelas = Math.round(1 + 3.3 * Math.log10(data.length));
+  kelas = [];
+
+  floor = Math.floor(1 + 3.3 * Math.log10(data.length));
+  ceil = Math.ceil(1 + 3.3 * Math.log10(data.length));
+
+  if (!kelas.includes(floor)) kelas.push(floor);
+  if (!kelas.includes(ceil)) kelas.push(ceil);
+
   $("#resultc").html(
     "k = 1 + 3.3 log " +
       data.length +
@@ -64,22 +88,38 @@ function get_result_c() {
       " = " +
       Number(1 + log).toFixed(1) +
       "</br><font color='white'>__</font>= " +
-      kelas
+      kelas.join(" dan ")
   );
 }
 
 function get_result_d() {
-  interval = Math.ceil(jangkauan / kelas);
-  $("#resultd").html(
-    "i = " +
+  interval = [];
+  str_print = "i ";
+  for (var i = 0; i < kelas.length; i++) {
+    floor = Number(Math.floor(jangkauan / kelas[i])).toFixed(0);
+    ceil = Number(Math.ceil(jangkauan / kelas[i])).toFixed(0);
+
+    interval.push([kelas[i], parseInt(floor)]);
+    if (floor != ceil) interval.push([kelas[i], parseInt(ceil)]);
+  }
+
+  for (var i = 0; i < interval.length; i++) {
+    str_print +=
+      " = " +
       jangkauan +
-      "/" +
-      kelas +
+      " / " +
+      interval[i][0] +
       "</br><font color='white'>__</font>= " +
-      Number(jangkauan / kelas).toFixed(1) +
+      interval[i][1] +
       "</br><font color='white'>__</font>= " +
-      interval
-  );
+      "Kelas " +
+      interval[i][0] +
+      " dengan interval " +
+      interval[i][1] +
+      "</br><font color='white'>__</font>";
+  }
+
+  $("#resultd").html(str_print);
 }
 
 function get_result_e() {
@@ -88,43 +128,45 @@ function get_result_e() {
 
 function get_result_f() {
   $(".result-f-table").empty();
-  first = true;
-  start = min;
-  end = max;
-  total = 0;
+  str_table_header =
+    "<table class='table'><thead><tr><th>Diameter</th><th>Frekuensi</th></tr></thead><tbody>";
+  str_table_tr_first = "<tr>";
+  str_table_tr_end = "</tr>";
+  str_table_td_first = "<td>";
+  str_table_td_end = "</td>";
+  str_final = "";
 
-  for (var i = 0; i < kelas; i++) {
-    if (first) {
-      $(".result-f-table").append(
-        "<tr><th>Diameter</th><th>Frekuensi</th></tr>"
-      );
+  for (var i = 0; i < interval.length; i++) {
+    start = min;
+    total = 0;
+    str_final +=
+      "<p> Kelas " + interval[i][0] + " Interval " + interval[i][1] + "</p>";
+    str_final += str_table_header;
+
+    for (var k = 0; k < interval[i][0]; k++) {
+      next = start + interval[i][1] - 1;
+      count = data.filter(get_between).length;
+      total += count;
+
+      str_final += "<tr><td>" + start + " - " + next + "</td>";
+      str_final += "<td>" + count + "</td></tr>";
+
+      start = next + 1;
     }
 
-    row = document.createElement("tr");
-    col_diameter = document.createElement("td");
-    col_frekuensi = document.createElement("td");
-
-    next = start + interval - 1;
-    count = data.filter(get_between);
-    total += count.length;
-    diameter = document.createTextNode(start + " - " + next);
-    frekuensi = document.createTextNode(count.length);
-
-    col_diameter.appendChild(diameter);
-    col_frekuensi.appendChild(frekuensi);
-    row.appendChild(col_diameter);
-    row.appendChild(col_frekuensi);
-
-    $(".result-f-table").append(row);
-
-    first = false;
-    start = next + 1;
+    str_final += "<tr><th>Jumlah</th><th>" + total + "</th></tbody></table>";
   }
 
-  $(".result-f-table").append("<tr><th>Jumlah</th><th>" + total + "</th>");
+  $("#resultf").html(str_final);
 }
 
 function get_between(val) {
   if ((val >= start) & (val <= next)) return val;
   else return false;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
